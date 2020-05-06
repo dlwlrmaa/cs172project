@@ -5,6 +5,7 @@ import requests
 import json 
 import os
 import re
+import time
 from tweepy import OAuthHandler, Stream
 from tweepy.streaming import StreamListener
 
@@ -13,6 +14,7 @@ api_key = config.API_key
 api_secret = config.API_secret
 access_token = config.access_token
 access_secret = config.access_secret
+
 
 class streamListener(StreamListener):
 
@@ -34,8 +36,7 @@ class streamListener(StreamListener):
                 "location" : str(location),
                 "timestamp" : str(timestamp)
             }
-            #tweet = {"USER:" + str(user) + " TEXT: "+ str(text) + " URL: " + str(urls) + " LOCATION: " + str(location) + " TIMESTAMP: " + str(timestamp) + '\n'}
-            numtweets = 1
+            print("Not extended")
         
         else:
             extendedtext = parsed_json["extended_tweet"]["full_text"]
@@ -47,13 +48,12 @@ class streamListener(StreamListener):
                 "location" : str(location),
                 "timestamp" : str(timestamp)
             }
-            tweet = {"USER:" + str(user) + " TEXT: "+ str(extendedtext) + " URL: " + str(urls) + " LOCATION: " + str(location) + " TIMESTAMP: " + str(timestamp) + '\n'}
-            numtweets = 2
+            print("Extended")
 
         with open(output_file, 'a+') as output:
             json.dump(dictionary, output)
             output.write('\n')
-            print(numtweets)
+
             return True
         return False
 
@@ -63,6 +63,7 @@ class streamListener(StreamListener):
 #end of streamListener
 
 if __name__ == '__main__':
+    #numtweets = 0
     new_stream_listener = streamListener()
     auth = OAuthHandler(api_key, api_secret)
     auth.set_access_token(access_token, access_secret)
@@ -70,7 +71,7 @@ if __name__ == '__main__':
 
     if os.path.isfile(output_file):
         os.remove(output_file)
-        f'File {output_file} has been reinitialized'
+        print(f"File {output_file} has been reinitialized")
 
     myStream.filter(locations = [-118.69, 33.73, -117.85, 34.22]) #coordinates are for Los Angeles
 

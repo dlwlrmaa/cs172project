@@ -61,6 +61,8 @@ class streamListener(StreamListener):
         with open(output_file, 'a+') as output:
             json.dump(dictionary, output)
             output.write('\n')
+            #output.write(data)
+            #print(data)
             tweetcount+=1
             return True
         

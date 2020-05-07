@@ -14,11 +14,13 @@ api_key = config.API_key
 api_secret = config.API_secret
 access_token = config.access_token
 access_secret = config.access_secret
+tweetcount = 0
 
 
 class streamListener(StreamListener):
 
     def on_data(self, data):
+        global tweetcount
         parsed_json = json.loads(data)
         user = parsed_json["user"]["screen_name"]
         urls  = parsed_json["entities"]["urls"]
@@ -49,14 +51,19 @@ class streamListener(StreamListener):
                 "timestamp" : str(timestamp)
             }
             print("Extended")
+        #timedone = 0
+        if(tweetcount >= 1000):
+            #timedone = time.process_time()
+            #print(f"{timedone/60} minutes")
+            print("Done collecting tweets!")
+            exit()
 
         with open(output_file, 'a+') as output:
             json.dump(dictionary, output)
             output.write('\n')
-
+            tweetcount+=1
             return True
-        return False
-
+        
 
     def on_error(self, status):
         print(status)

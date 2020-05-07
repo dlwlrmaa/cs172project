@@ -69,6 +69,11 @@ class streamListener(StreamListener):
         print(status)
 #end of streamListener
 
+def URLTitleFinder(tweetFile):
+	#TODO: Find URLs in Tweets
+
+	#TODO: Add title of URL into respective JSON object as new field
+
 if __name__ == '__main__':
     #numtweets = 0
     new_stream_listener = streamListener()
@@ -81,5 +86,6 @@ if __name__ == '__main__':
         print(f"File {output_file} has been reinitialized")
 
     myStream.filter(locations = [-118.69, 33.73, -117.85, 34.22]) #coordinates are for Los Angeles
+
 
 #resource http://docs.tweepy.org/en/latest/streaming_how_to.html

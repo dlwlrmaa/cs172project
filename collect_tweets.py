@@ -53,6 +53,7 @@ class streamListener(StreamListener):
             }
             print("Extended")
         #timedone = 0
+        #Change tweetcount limit to what is acceptable
         if(tweetcount >= 10):
             #timedone = time.process_time()
             #print(f"{timedone/60} minutes")

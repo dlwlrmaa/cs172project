@@ -90,7 +90,6 @@ def URLTitleFinder(tweetFile):
                 for i in pageURL:
                     soup = BeautifulSoup(urllib.request.urlopen(pageURL[i]), "html.parser")
                     title = soup.title.string
-            line.update({"Title": title})
 
 if __name__ == '__main__':
     #numtweets = 0

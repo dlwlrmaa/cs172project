@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-
+import urllib.request
 import config
 import requests
 import json 
 import os
 import re
 import time
+from bs4 import BeautifulSoup
 from tweepy import OAuthHandler, Stream
 from tweepy.streaming import StreamListener
 
@@ -52,11 +53,11 @@ class streamListener(StreamListener):
             }
             print("Extended")
         #timedone = 0
-        if(tweetcount >= 1000):
+        if(tweetcount >= 10):
             #timedone = time.process_time()
             #print(f"{timedone/60} minutes")
             print("Done collecting tweets!")
-            exit()
+            return False
 
         with open(output_file, 'a+') as output:
             json.dump(dictionary, output)
@@ -70,9 +71,17 @@ class streamListener(StreamListener):
 #end of streamListener
 
 def URLTitleFinder(tweetFile):
-	#TODO: Find URLs in Tweets
-
-	#TODO: Add title of URL into respective JSON object as new field
+	data = ""
+	with open(tweetFile) as f:
+		for line in f:
+			data = json.loads(line)
+			pageURL = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\.html', data["text"])
+			if pageURL != []:
+				for i in pageURL:
+					soup = BeautifulSoup(urllib.request.urlopen(pageURL[i]), "html.parser")
+					title = soup.title.string
+					#TODO: Add title of URL into respective JSON object as new field
+#end of URLTitleFinder
 
 if __name__ == '__main__':
     #numtweets = 0
@@ -86,6 +95,5 @@ if __name__ == '__main__':
         print(f"File {output_file} has been reinitialized")
 
     myStream.filter(locations = [-118.69, 33.73, -117.85, 34.22]) #coordinates are for Los Angeles
-
-
+    URLTitleFinder('output_tweets.json')
 #resource http://docs.tweepy.org/en/latest/streaming_how_to.html

@@ -59,7 +59,7 @@ class streamListener(StreamListener):
             print("Extended")
         #timedone = 0
         #Change tweetcount limit to what is acceptable
-        if(tweetcount >= 50):
+        if(tweetcount >= 25):
             #timedone = time.process_time()
             #print(f"{timedone/60} minutes")
             print("Done collecting tweets!")
@@ -78,13 +78,11 @@ class streamListener(StreamListener):
 #end of streamListener
 
 def URLTitleFinder(tweetFile):
-	data = ""
 	expanded_url = 'expanded_url'
-	with open(tweetFile) as f:
+	with open(tweetFile, "r+") as f:
 		for line in f:
 			data = json.loads(line)
 			pageURL = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', data["text"])
-			#print(expanded_url in data["url"][0])
 			if data["url"] != [] and (expanded_url in data["url"][0]) and pageURL != []:
 				print(data["url"][0])
 				pageURL = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', data['url'][0]['expanded_url'])
@@ -94,11 +92,13 @@ def URLTitleFinder(tweetFile):
 						print(pageURL[i])
 						soup = BeautifulSoup(urllib.request.urlopen(pageURL[i]).read(), "html.parser")
 						title = soup.title.string.encode("utf-8")
-						#TODO: Add title of URL into respective JSON object as new field
+						data.update({"title" : str(title)})
+						json.dump(data, f)
 #end of URLTitleFinder
 
 if __name__ == '__main__':
     #numtweets = 0
+    """
     new_stream_listener = streamListener()
     auth = OAuthHandler(api_key, api_secret)
     auth.set_access_token(access_token, access_secret)
@@ -109,5 +109,6 @@ if __name__ == '__main__':
         print(f"File {output_file} has been reinitialized")
 
     myStream.filter(locations = [-118.69, 33.73, -117.85, 34.22]) #coordinates are for Los Angeles
+    """
     URLTitleFinder('output_tweets.json')
 #resource http://docs.tweepy.org/en/latest/streaming_how_to.html

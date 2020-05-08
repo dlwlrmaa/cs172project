@@ -11,15 +11,20 @@ from tweepy import OAuthHandler, Stream
 from tweepy.streaming import StreamListener
 
 output_file = 'output_tweets.json'
-api_key = config.API_key
-api_secret = config.API_secret
-access_token = config.access_token
-access_secret = config.access_secret
+api_key = 'ds8VYTy9fQ6eYMMomHTnO05bE' #config.API_key
+api_secret = 'igiWuhBeCmYdHF8JbrymycCEq7jNxk4m6yFq9jPXzgO2O4RPiV' #config.API_secret
+access_token = '1945957765-O1XB4W4LuST4twPkXeb16RzpoFy3HdHAG8gmT14' #config.access_token
+access_secret = 'azMIGPu15pImXHJuZ3XlvamQmTWL7oXhSQwvcmDz4KLi0' #config.access_secret
 tweetcount = 0
 
-
+#StreamLister can classify most common twitter messages and routes
+#them to appropriately named methods, but these methods
+#are only stubs
+#http://docs.tweepy.org/en/v3.4.0/streaming_how_to.html
 class streamListener(StreamListener):
 
+#on_data method of a stream listener receives all messages
+#and calls function according to the message type. 
     def on_data(self, data):
         global tweetcount
         parsed_json = json.loads(data)
@@ -58,6 +63,7 @@ class streamListener(StreamListener):
             #timedone = time.process_time()
             #print(f"{timedone/60} minutes")
             print("Done collecting tweets!")
+            #exit()
             return False
 
         with open(output_file, 'a+') as output:
@@ -93,7 +99,6 @@ def URLTitleFinder(tweetFile):
 
 if __name__ == '__main__':
     #numtweets = 0
-    """
     new_stream_listener = streamListener()
     auth = OAuthHandler(api_key, api_secret)
     auth.set_access_token(access_token, access_secret)
@@ -104,6 +109,5 @@ if __name__ == '__main__':
         print(f"File {output_file} has been reinitialized")
 
     myStream.filter(locations = [-118.69, 33.73, -117.85, 34.22]) #coordinates are for Los Angeles
-    """
     URLTitleFinder('output_tweets.json')
 #resource http://docs.tweepy.org/en/latest/streaming_how_to.html

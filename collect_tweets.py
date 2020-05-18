@@ -40,6 +40,7 @@ class streamListener(StreamListener):
             'user': tweetdata['user']['screen_name'],
             'text': text,
             'urls': tweetdata['entities']['urls'],
+            'url_title' : None,
             'location': tweetdata['place']['full_name'],
             'created_at': tweetdata.get('created_at'),
             'geolocation': tweetdata['place']['bounding_box']['coordinates']

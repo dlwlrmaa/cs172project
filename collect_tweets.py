@@ -23,47 +23,30 @@ tweetcount = 0
 #http://docs.tweepy.org/en/v3.4.0/streaming_how_to.html
 class streamListener(StreamListener):
 
-#on_data method of a stream listener receives all messages
-#and calls function according to the message type. 
-    def on_data(self, data):
+#on_status method of a stream listener receives all statuses
+    def on_status(self, status):
+        #print(status)
+        #print('\n')
+
         global tweetcount
-        parsed_json = json.loads(data)
-        user = parsed_json["user"]["screen_name"]
-        urls  = parsed_json["entities"]["urls"]
-        #parsed_url = parsed_json["expanded_url"]
-        location = parsed_json["place"]["full_name"]
-        timestamp = parsed_json["created_at"]
-        truncated = parsed_json["truncated"]
-        if( not truncated):
-            text = parsed_json["text"]
+        tweetdata = status._json
+        text = tweetdata.get('text')
+        try:
+            text = status.extended_tweet['full_text']
+        except Exception as e:
+            pass
 
-            dictionary ={
-                "user": str(user),
-                "text": str(text),
-                "url" : urls,
-                "location" : str(location),
-                "timestamp" : str(timestamp)
-            }
-            print("Not extended")
-        
-        else:
-            extendedtext = parsed_json["extended_tweet"]["full_text"]
-
-            dictionary = {
-                "user": str(user),
-                "text": str(extendedtext),
-                "url" : urls,
-                "location" : str(location),
-                "timestamp" : str(timestamp)
-            }
-            print("Extended")
-        #timedone = 0
-        #Change tweetcount limit to what is acceptable
-        if(tweetcount >= 1000):
-            #timedone = time.process_time()
-            #print(f"{timedone/60} minutes")
+        dictionary = {
+            'user': tweetdata['user']['screen_name'],
+            'text': text,
+            'urls': tweetdata['entities']['urls'],
+            'url_title' : None,
+            'location': tweetdata['place']['full_name'],
+            'created_at': tweetdata.get('created_at'),
+            'geolocation': tweetdata['place']['bounding_box']['coordinates']
+        }
+        if(tweetcount >= 50):
             print("Done collecting tweets!")
-            #exit()
             return False
 
         with open(output_file, 'a+') as output:
@@ -71,28 +54,29 @@ class streamListener(StreamListener):
             output.write('\n')
             tweetcount+=1
             return True
-        
 
     def on_error(self, status):
         print(status)
+        return False
 #end of streamListener
 
 def URLTitleFinder(tweetFile):
-	expanded_url = 'expanded_url'
-	with open(tweetFile, "r+") as f:
-		for line in f:
-			data = json.loads(line)
-			pageURL = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', data["text"])
-			if data["url"] != [] and (expanded_url in data["url"][0]) and pageURL != []:
+    print("Finding URL Titles!")
+    expanded_url = 'expanded_url'
+    with open(tweetFile, "a+") as f:
+        for line in f:
+            data = json.loads(line)
+            pageURL = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', data["text"])
+            if data["url"] != [] and (expanded_url in data["url"][0]) and pageURL != []:
 				#print(data["url"][0])
-				pageURL = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', data['url'][0]['expanded_url'])
-				if pageURL!= []:
-					for i in range(len(pageURL)):
+                pageURL = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', data['url'][0]['expanded_url'])
+                if pageURL!= []:
+                    for i in range(len(pageURL)):
 						#print(pageURL[i])
-						soup = BeautifulSoup(urllib.request.urlopen(pageURL[i]).read(), "html.parser")
-						title = soup.title.string.encode("utf-8")
-						data.update({"title" : str(title)})
-						json.dump(data, f)
+                        soup = BeautifulSoup(urllib.request.urlopen(pageURL[i]).read(), "html.parser")
+                        title = soup.title.string.encode("utf-8")
+                        data.update({"title" : str(title)})
+                        json.dump(data, f)
 #end of URLTitleFinder
 
 if __name__ == '__main__':

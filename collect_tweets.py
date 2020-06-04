@@ -82,16 +82,7 @@ class streamListener(StreamListener):
         }
         self.q.put(dictionary)
         return True
-        '''if(tweetcount >= 10 * 1024 * 1024):
-            print("Done collecting tweets!")
-            return False
-
-        with open(output_file, 'a+') as output:
-            json.dump(dictionary, output)
-            output.write('\n')
-            tweetcount+=1
-            print(f'{tweetcount}')
-            return True'''
+        
 
     def on_error(self, status):
         print(status)

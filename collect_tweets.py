@@ -106,7 +106,7 @@ def URLTitleFinder(tweet):
     if(has_url and "twitter" not in tweet['urls']):
         url = tweet['urls']
         #html = request.urlopen(url).read().decode('utf8')
-        html = requests.get(url)
+        html = requests.get(url).text
         #html[:60]
         soup = BeautifulSoup(html, 'html.parser')
         #title = soup.find('title')

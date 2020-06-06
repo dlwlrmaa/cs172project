@@ -1,0 +1,87 @@
+<component name="libraryTable">
+  <library name="lucene">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/libraries/lucene/backward-codecs" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/benchmark" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/classification" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/codecs" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/core" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/demo" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/expressions" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/facet" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/grouping" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/highlighter" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/join" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/luke" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/memory" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/misc" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/monitor" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/queries" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/queryparser" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/replicator" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/sandbox" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/spatial-extras" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/spatial3d" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/suggest" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/test-framework" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/analyzers-common" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/analyzers-icu" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/analyzers-kuromoji" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/analyzers-morfologik" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/analyzers-nori" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/analyzers-opennlp" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/analyzers-phonetic" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/analyzers-smartcn" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/analyzers-stempel" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/backward-codecs" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/benchmark" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/classification" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/codecs" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/core" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/demo" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/expressions" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/facet" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/grouping" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/highlighter" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/join" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/luke" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/memory" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/misc" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/monitor" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/queries" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/queryparser" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/replicator" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/sandbox" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/spatial-extras" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/spatial3d" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/suggest" />
+      <root url="file://$PROJECT_DIR$/libraries/lucene/docs/test-framework" />
+    </JAVADOC>
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/backward-codecs" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/benchmark" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/classification" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/codecs" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/core" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/demo" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/expressions" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/facet" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/grouping" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/highlighter" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/join" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/luke" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/memory" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/misc" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/monitor" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/queries" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/queryparser" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/replicator" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/sandbox" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/spatial-extras" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/spatial3d" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/suggest" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/lucene/test-framework" recursive="false" />
+  </library>
+</component>

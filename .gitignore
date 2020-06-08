@@ -1,3 +1,6 @@
 config.py
 venv/
+collect_tweets/*.json
+index_tweets/libraries
+
 

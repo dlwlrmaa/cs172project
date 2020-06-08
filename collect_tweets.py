@@ -61,27 +61,38 @@ class streamListener(StreamListener):
             url_bool = True
         except Exception as e:
             url_bool = False
-
-        dictionary = {
-            'user': tweetdata['user']['screen_name'],
-            'text': text,
-            'city': tweetdata['place']['full_name'],
-            'country': tweetdata['place']['country'],
-            'created_at': tweetdata.get('created_at'),
-            'geolocation': tweetdata['place']['bounding_box']['coordinates'],
-            'urls': url,
-            'url_bool': url_bool,
-            'url_title' : None,                                                     #get title in a different function
-            'hashtags': tweetdata['entities']['hashtags'],
-            'retweets': tweetdata['retweet_count'],
-            'favorites': tweetdata['favorite_count'],
-            'replies': tweetdata['reply_count'],
-            'quotes': tweetdata['quote_count'],
-            'followers': tweetdata['user']['followers_count'],
-            'verified': tweetdata['user']['verified']
-        }
-        self.q.put(dictionary)
-        return True
+        try:
+            city_name = tweetdata['place']['full_name']
+        except Exception as e:
+            city_name = "None"
+        try:
+            country_name = tweetdata['place']['country']
+        except Exception as e:
+            country_name = "None"
+        try:
+            dictionary = {
+                'user': tweetdata['user']['screen_name'],
+                'text': text,
+                'city': city_name,
+                'country': country_name,
+                'created_at': tweetdata.get('created_at'),
+                'geolocation': tweetdata['place']['bounding_box']['coordinates'],
+                'urls': url,
+                'url_bool': url_bool,
+                'url_title' : None,                                                     #get title in a different function
+                'hashtags': tweetdata['entities']['hashtags'],
+                'retweets': tweetdata['retweet_count'],
+                'favorites': tweetdata['favorite_count'],
+                'replies': tweetdata['reply_count'],
+                'quotes': tweetdata['quote_count'],
+                'followers': tweetdata['user']['followers_count'],
+                'verified': tweetdata['user']['verified']
+            }
+            self.q.put(dictionary)
+            return True
+        except Exception as e:
+            print("FAILED TWEET...CONTINUE" + '\n')
+            return True
         
 
     def on_error(self, status):
@@ -103,18 +114,21 @@ def URLTitleFinder(tweet):
     has_url = tweet['url_bool']
     #print(f"{test} + '\n'")
     #print(tweet['url_bool'])
-    if(has_url and "twitter" not in tweet['urls']):
-        url = tweet['urls']
-        #html = request.urlopen(url).read().decode('utf8')
-        html = requests.get(url).text
-        #html[:60]
-        soup = BeautifulSoup(html, 'html.parser')
-        #title = soup.find('title')
-        title = str(soup.find('title'))
-        title = title[7:-8]
-        tweet['url_title'] = title
-        #print(f'{title}')
-        #print(soup.title.string)
+    try:
+        if(has_url and "twitter" not in tweet['urls']):
+            url = tweet['urls']
+            #html = request.urlopen(url).read().decode('utf8')
+            html = requests.get(url).text
+            #html[:60]
+            soup = BeautifulSoup(html, 'html.parser')
+            #title = soup.find('title')
+            title = str(soup.find('title'))
+            title = title[7:-8]
+            tweet['url_title'] = title
+            #print(f'{title}')
+            #print(soup.title.string)
+    except Exception as e:
+        pass
 
     tweetfile.write(json.dumps(tweet) + '\n')
 
@@ -123,11 +137,11 @@ def URLTitleFinder(tweet):
 
     page_info = os.stat(output_file_name)
     if(page_info.st_size > maxfilesize):
-        print('Creating new json file...' + '\n')
         tweetfile.close()
         file_num+=1
         output_file_name = output + str(file_num) + '.json'
-        tweetfile = open(output_file_name, 'a+')              
+        tweetfile = open(output_file_name, 'a+')
+        print(f'Creating new json file... {output_file_name}' + '\n')              
 #end of URLTitleFinder
 
 if __name__ == '__main__':
@@ -137,7 +151,8 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_secret)
     myStream = Stream(auth, new_stream_listener)
 
-    myStream.filter(locations = [-123.90, 32.52, -64.24, 48.54], languages = ['en'] ) #coordinates are for The United States of America and only getting tweets in english
+    #myStream.filter(locations = [-123.90, 32.52, -64.24, 48.54], languages = ['en'] ) #coordinates are for The United States of America and only getting tweets in english
+    myStream.filter(locations = [-153.33, 2.63, 18.74, 67.74], languages = ['en'] )
     #myStream.filter(languages = ['en'] )
     #URLTitleFinder('output_tweets.json')
 #resource http://docs.tweepy.org/en/latest/streaming_how_to.html

@@ -65,6 +65,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             String path = "../collect_tweets/tweets_";
+
             int fileNumber = 1;
             String extension = ".json";
 
@@ -76,6 +77,7 @@ public class Main {
 
             StandardAnalyzer analyzer = new StandardAnalyzer();
             FSDirectory index = FSDirectory.open(Paths.get("../index"));
+            FileWriter file = new FileWriter("../index/hashtags.json");
             IndexWriterConfig config = new IndexWriterConfig(analyzer);
             IndexWriter w = new IndexWriter(index, config);
             HashMap<Integer, Vector<Hashtag>> hashtags = new HashMap<Integer, Vector<Hashtag>>();
@@ -144,10 +146,8 @@ public class Main {
                     jsonHashtags.put("id", id);
                     jsonHashtags.put("hashtags", ht_array);
 
-                    FileWriter file = new FileWriter("../index/hashtags.json");
                     file.write(jsonHashtags.toJSONString());
-                    file.flush();
-                    file.close();
+                    file.write("\n");
 
                     /*JSONObject ht_json;
                     String ht_text;
@@ -177,6 +177,8 @@ public class Main {
                 tweets = new File(path + fileNumber + extension);
             }
             w.close();
+            file.flush();
+            file.close();
 
         } catch(Exception e) {
             e.printStackTrace();

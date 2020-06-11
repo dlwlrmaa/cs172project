@@ -1,0 +1,10 @@
+Requires libraries:
+
+ANTLR runtime 4.5.1
+json-simple 1.1.1
+ASM 8.0.1
+lucene 8.5.2
+Spring Boot 2.3.0
+Spring Boot Starter Web 2.3.0
+
+Use IntelliJ IDEA to open projects index_tweets and search_tweets

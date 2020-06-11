@@ -19,10 +19,11 @@ import org.apache.lucene.expressions.js.JavascriptCompiler;
 import org.apache.lucene.queries.function.FunctionScoreQuery;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.springframework.web.bind.annotation.CrossOrigin;
+//import org.json.simple.JSONArray;
+//import org.json.simple.JSONObject;
+//import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.ParseException;
 
 import org.apache.lucene.analysis.standard.*;
 import org.apache.lucene.document.*;
@@ -31,6 +32,7 @@ import org.apache.lucene.store.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders="*")
 public class Search {
     @RequestMapping("/search")
     public static void Search(@RequestParam(required=false, defaultValue="") String query) throws IOException {

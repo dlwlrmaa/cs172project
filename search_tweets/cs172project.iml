@@ -9,9 +9,11 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lucene-8.5.2" level="project" />
     <orderEntry type="library" name="json-simple-1.1.1" level="project" />
-    <orderEntry type="library" name="antlr-runtime-4.5.1" level="project" />
     <orderEntry type="library" name="asm-8.0.1" level="project" />
-    <orderEntry type="library" name="org.springframework.boot:spring-boot:2.3.0.RELEASE" level="project" />
     <orderEntry type="library" name="org.springframework.boot:spring-boot-starter-web:2.3.0.RELEASE" level="project" />
+    <orderEntry type="library" name="org.springframework.boot:spring-boot:2.3.0.RELEASE" level="project" />
+    <orderEntry type="library" name="backward-codecs" level="project" />
+    <orderEntry type="library" name="antlr-runtime-4.5.1" level="project" />
+    <orderEntry type="library" name="asm-8.0.1-javadoc" level="project" />
   </component>
 </module>

@@ -10,6 +10,17 @@ export default class searchBar extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault()
+		const query = this.state.search
+		const baseURL = 'http://localhost:8080'
+		const searchURL = baseURL + '/search?query="' + query + '"'
+		console.log(searchURL.toString())
+		fetch(searchURL)
+		 .then(res => res.json())
+		 .then((data) => {
+		 	this.setState({searchResults: data})
+		 	console.log(this.state)
+		 })
+		 .catch(console.log)
 	}
 
 	handleInputChange = (event) => {
@@ -18,12 +29,13 @@ export default class searchBar extends Component {
 			search: event.target.value
 		})
 	}
+
 	render () {
 		const {search} = this.state
 		return (
 			<div>
 				<h1>Search Bar</h1>
-				<p>Search is: {search}</p>
+				<p>Query is: {search}</p>
 				<form onSubmit={this.handleSubmit}>
 					<p><input type='text' placeholder='Search a Tweet' name='name' onChange={this.handleInputChange}/></p>
 					<p><button>Search</button></p>

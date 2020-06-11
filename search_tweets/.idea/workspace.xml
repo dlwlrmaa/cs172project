@@ -42,12 +42,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path" value="C:\Users\Paul Choi\Documents\Spring 2020\CS 172\Project\cs172project\libraries\spring" />
+    <property name="Downloaded.Files.Path" value="C:\Users\Eric\Desktop\CS172\cs172project\search_tweets" />
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../libraries/asm/asm-tree-8.0.1.jar!/" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libraries/asm/asm-tree-8.0.1.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.4643678" />
@@ -58,15 +60,8 @@
       <option name="MAIN_CLASS_NAME" value="org.ucr.cs172project_backend.Main" />
       <module name="cs172project" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -76,6 +71,19 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ec60a0fb-b020-412a-b493-807deddf2749" name="Default Changelist" comment="" />
+      <created>1591852748998</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591852748998</updated>
+    </task>
+    <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -104,37 +112,49 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="743" y="414" width="433" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1591830680404" />
-    <state x="757" y="390" key="DetectedRootsChooserDialog" timestamp="1591826325760">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="757" y="405" key="DetectedRootsChooserDialog" timestamp="1591853389070">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="757" y="390" key="DetectedRootsChooserDialog/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1591826325760" />
-    <state x="666" y="261" key="FileChooserDialogImpl" timestamp="1591830314249">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="757" y="405" key="DetectedRootsChooserDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1591853389070" />
+    <state x="666" y="271" key="FileChooserDialogImpl" timestamp="1591856601375">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="666" y="261" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1591830314249" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1591842838453">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="666" y="271" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1591856601375" />
+    <state width="914" height="266" key="GridCell.Tab.0.bottom" timestamp="1591857868684">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1591842838453" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1591842838453">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="914" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1591857868684" />
+    <state width="914" height="266" key="GridCell.Tab.0.center" timestamp="1591857868684">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1591842838453" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1591842838453">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="914" height="266" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1591857868684" />
+    <state width="914" height="266" key="GridCell.Tab.0.left" timestamp="1591857868684">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1591842838453" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1591842838453">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="914" height="266" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1591857868684" />
+    <state width="914" height="266" key="GridCell.Tab.0.right" timestamp="1591857868684">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1591842838453" />
-    <state x="357" y="189" key="SettingsEditor" timestamp="1591838053740">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="914" height="266" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1591857868684" />
+    <state x="625" y="244" key="NewModule_or_Project.wizard" timestamp="1591855583680">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="625" y="244" key="NewModule_or_Project.wizard/0.0.1920.1080@0.0.1920.1080" timestamp="1591855583680" />
+    <state x="357" y="196" key="SettingsEditor" timestamp="1591856602627">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="357" y="189" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1591838053740" />
-    <state x="664" y="411" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1591831256882">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="357" y="196" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1591856602627" />
+    <state x="664" y="427" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1591853438060">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="664" y="411" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1591831256882" />
+    <state x="664" y="427" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1080@0.0.1920.1080" timestamp="1591853438060" />
   </component>
 </project>

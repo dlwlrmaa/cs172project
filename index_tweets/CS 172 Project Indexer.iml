@@ -9,5 +9,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="json-simple-1.1.1" level="project" />
     <orderEntry type="library" name="lucene-8.5.2" level="project" />
+    <orderEntry type="library" name="org.springframework.boot:spring-boot:2.3.0.RELEASE" level="project" />
+    <orderEntry type="library" name="org.springframework.boot:spring-boot-starter-web:2.3.0.RELEASE" level="project" />
+    <orderEntry type="library" name="backward-codecs" level="project" />
   </component>
 </module>

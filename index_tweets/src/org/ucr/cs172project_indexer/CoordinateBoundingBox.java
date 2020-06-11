@@ -1,4 +1,4 @@
-package org.ucr.cs172project_backend;
+package org.ucr.cs172project_indexer;
 
 public class CoordinateBoundingBox {
     private double lat1;

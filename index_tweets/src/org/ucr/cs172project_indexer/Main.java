@@ -1,13 +1,11 @@
-package org.ucr.cs172project_backend;
+package org.ucr.cs172project_indexer;
 
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.BufferedReader;
+import java.io.*;
+import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Vector;
 
 import org.json.simple.JSONArray;
@@ -18,17 +16,28 @@ import org.json.simple.parser.ParseException;
 import org.apache.lucene.analysis.standard.*;
 import org.apache.lucene.document.*;
 import org.apache.lucene.index.*;
-import org.apache.lucene.queryparser.classic.*;
-import org.apache.lucene.search.*;
 import org.apache.lucene.store.*;
-import org.ucr.cs172project_backend.CoordinateBoundingBox;
 
 public class Main {
+
+    private static float dateBoost(String date) {
+        float boost = 1.0f;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss Z uuuu");
+        ZonedDateTime dateTime = ZonedDateTime.parse(date, formatter);
+        ZonedDateTime currentDate = ZonedDateTime.now();
+
+        Duration diff = Duration.between(dateTime, currentDate);
+        boost = 100000.0f / diff.toMinutes();
+
+        return boost;
+    }
 
     private static void addDoc(IndexWriter w, int id, String user, String text, String city, String country,
                                String created_at, double latitude, double longitude, String urls, int url_bool,
                                String url_title, int retweets, int favorites, int replies,
                                int quotes, int followers, int verified) throws IOException {
+        float date = dateBoost(created_at);
+
         Document doc = new Document();
         doc.add(new StoredField("id", id));
         doc.add(new StringField("user", user, Field.Store.YES));
@@ -47,10 +56,13 @@ public class Main {
         doc.add(new StoredField("quotes", quotes));
         doc.add(new StoredField("followers", followers));
         doc.add(new StoredField("verified", verified));
+        doc.add(new NumericDocValuesField("age", (long) date));
+        doc.add(new StoredField("age", date));
+
         w.addDocument(doc);
     }
 
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) {
         try {
             String path = "../collect_tweets/tweets_";
             int fileNumber = 1;
@@ -63,11 +75,14 @@ public class Main {
             JSONObject jsonObject;
 
             StandardAnalyzer analyzer = new StandardAnalyzer();
-            Directory index = new RAMDirectory();
+            FSDirectory index = FSDirectory.open(Paths.get("../index"));
             IndexWriterConfig config = new IndexWriterConfig(analyzer);
             IndexWriter w = new IndexWriter(index, config);
             HashMap<Integer, Vector<Hashtag>> hashtags = new HashMap<Integer, Vector<Hashtag>>();
             int id = 0;
+
+            JSONArray ht_array;
+            JSONObject jsonHashtags;
 
             File tweets = new File(path + fileNumber + extension);
             while (tweets.isFile()) {
@@ -124,8 +139,17 @@ public class Main {
 
                     addDoc(w, id, user, text, city, country, created_at, cbb_array[0], cbb_array[1], urls, url_bool, url_title, retweets, favorites, replies, quotes, followers, verified);
 
-                    JSONArray ht_array = (JSONArray) jsonObject.get("hashtags");
-                    JSONObject ht_json;
+                    ht_array = (JSONArray) jsonObject.get("hashtags");
+                    jsonHashtags = new JSONObject();
+                    jsonHashtags.put("id", id);
+                    jsonHashtags.put("hashtags", ht_array);
+
+                    FileWriter file = new FileWriter("../index/hashtags.json");
+                    file.write(jsonHashtags.toJSONString());
+                    file.flush();
+                    file.close();
+
+                    /*JSONObject ht_json;
                     String ht_text;
                     JSONArray ht_index;
                     int a, b;
@@ -143,7 +167,7 @@ public class Main {
                     }
 
                     hashtags.put(id, ht_vector);
-
+                    */
                     ++id;
                 }
 
@@ -153,34 +177,6 @@ public class Main {
                 tweets = new File(path + fileNumber + extension);
             }
             w.close();
-
-            String querystr = "black lives matter";
-            Query q = new QueryParser("text", analyzer).parse(querystr);
-
-            int hitsPerPage = 100;
-            IndexReader ireader = DirectoryReader.open(index);
-            IndexSearcher searcher = new IndexSearcher(ireader);
-            TopDocs docs = searcher.search(q, hitsPerPage);
-            ScoreDoc[] hits = docs.scoreDocs;
-
-            System.out.println("Found " + hits.length + " hits.");
-            for (int i = 0; i < hits.length; ++i) {
-                int docId = hits[i].doc;
-                Document d = searcher.doc(docId);
-                int tweetID = Integer.parseInt(d.get("id"));
-                System.out.println("ID: " + tweetID);
-                System.out.println((i + 1) + ". @" + d.get("user"));
-                System.out.println(d.get("text"));
-                System.out.println();
-
-                System.out.println("Hashtags");
-                for (Hashtag h : hashtags.get(tweetID)) {
-                    System.out.println("#" + h.getText());
-                }
-                System.out.println();
-            }
-
-            ireader.close();
 
         } catch(Exception e) {
             e.printStackTrace();

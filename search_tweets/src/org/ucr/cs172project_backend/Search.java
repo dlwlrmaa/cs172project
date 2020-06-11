@@ -33,12 +33,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class Search {
     @RequestMapping("/search")
-    public String Search(@RequestParam(required=false, defaultValue="") String query) throws IOException, ParseException {
+    public static void Search(@RequestParam(required=false, defaultValue="") String query) throws IOException {
         try {
             StandardAnalyzer analyzer = new StandardAnalyzer();
             FSDirectory index = FSDirectory.open(Paths.get("../index"));
-            IndexWriterConfig config = new IndexWriterConfig(analyzer);
-            IndexWriter w = new IndexWriter(index, config);
 
             Expression expr = JavascriptCompiler.compile("_score * age");
             SimpleBindings bindings = new SimpleBindings();
@@ -76,11 +74,9 @@ public class Search {
             }
 
             ireader.close();
-        } catch (org.apache.lucene.queryparser.classic.ParseException e) {
-            e.printStackTrace();
-        } catch (java.text.ParseException e) {
+            index.close();
+        } catch (org.apache.lucene.queryparser.classic.ParseException | java.text.ParseException e) {
             e.printStackTrace();
         }
-        return "hello world";
     }
 }

@@ -1,18 +1,10 @@
 package org.ucr.cs172project_backend;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.BufferedReader;
 import java.nio.file.Paths;
-import java.time.Duration;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.expressions.Expression;
 import org.apache.lucene.expressions.SimpleBindings;
 import org.apache.lucene.expressions.js.JavascriptCompiler;
@@ -34,8 +26,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders="*")
 public class Search {
-    @RequestMapping("/search")
-    public static void Search(@RequestParam(required=false, defaultValue="") String query) throws IOException {
+    @GetMapping("/search")
+    public static List<Document> Search(@RequestParam(required=false, defaultValue="") String query) throws IOException {
         try {
             StandardAnalyzer analyzer = new StandardAnalyzer();
             FSDirectory index = FSDirectory.open(Paths.get("../index"));
@@ -55,12 +47,15 @@ public class Search {
             IndexSearcher searcher = new IndexSearcher(ireader);
             TopDocs docs = searcher.search(q, hitsPerPage);
             ScoreDoc[] hits = docs.scoreDocs;
+            List<Document> matchingTweets = new ArrayList<>();
 
             System.out.println("Found " + hits.length + " hits.");
             for (int i = 0; i < hits.length; ++i) {
                 int docId = hits[i].doc;
                 Document d = searcher.doc(docId);
                 int tweetID = Integer.parseInt(d.get("id"));
+                matchingTweets.add(d);
+                /*
                 System.out.println("ID: " + tweetID);
                 System.out.println((i + 1) + ". @" + d.get("user"));
                 System.out.println(d.get("text"));
@@ -68,17 +63,18 @@ public class Search {
                 System.out.println(d.get("age"));
                 System.out.println(hits[i].score);
                 System.out.println(d.get("created_at"));
-                System.out.println("Hashtags");
+                System.out.println("Hashtags");*/
                 /*for (Hashtag h : hashtags.get(tweetID)) {
                     System.out.println("#" + h.getText());
                 }
                 System.out.println();*/
             }
-
             ireader.close();
             index.close();
+            return matchingTweets;
         } catch (org.apache.lucene.queryparser.classic.ParseException | java.text.ParseException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }
